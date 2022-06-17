@@ -5,9 +5,20 @@ This application is a student challenge. The following is the prompt along with 
 
 File path: app/controllers/application_controller.rb
  
- >`skip_before_action :verify_authenticity_token`
+ > `skip_before_action :verify_authenticity_token`
  
  This code was added to assist with development. Allowing this code to ship could compromise app security.
+
+## Notes to self:
+
+I deleted views and helpers to prevent Ruby magic from looking for views.
+
+```
+	deleted:    app/helpers/animals_helper.rb
+	deleted:    app/views/layouts/application.html.erb
+	deleted:    app/views/layouts/mailer.html.erb
+	deleted:    app/views/layouts/mailer.text.erb
+```
 
 # The API Stories
 
@@ -15,14 +26,62 @@ The Forest Service is considering a proposal to place in conservancy a forest of
 
 - [x] Story: As a developer I can create an animal model in the database. An animal has the following information: *common name*, *latin name*, *kingdom* (mammal, insect, etc.).
 
+    - in rails console:
+
+        ```
+        $ rails generate resource Animals common_name:string latin_name:string kingdom:string
+        ```
+
 - [x] Story: As the consumer of the API I can **see all the animals** in the database.
-    > Hint: Make a few animals using Rails Console
+    - Hint: Make a few animals using Rails Console
+
+> File path: app/controllers/animals_controller.rb
+```
+def show
+    animal = Animal.find(params[:id])
+    render json: animal
+end
+```
 
 - [x] Story: As the consumer of the API I can **update an animal** in the database.
 
-- [ ] Story: As the consumer of the API I can **destroy an animal** in the database.
+> File path: app/controllers/animals_controller.rb
+```
+def update
+    animal = Animal.find(params[:id])
+    if animal.update(params.require(:animal).permit(:common_name, :latin_name, :kingdom))
+        render json: animal
+    else
+        render json: animal.errors
+    end
+end
+```
+
+- [x] Story: As the consumer of the API I can **destroy an animal** in the database.
+
+> File path: app/controllers/animals_controller.rb
+```
+def destroy
+    animal = Animal.find(params[:id])
+    animals = Animal.all
+    animal.destroy
+    render json: animals
+end
+```
 
 - [x] Story: As the consumer of the API I can **create a new animal** in the database.
+
+> File path: app/controllers/animals_controller.rb
+```
+def create
+    animal = Animal.create(animal_params)
+    if animal.valid? 
+        render json: animal
+    else
+        render json: animal.errors
+    end
+end
+```
 
 - [ ] Story: As the consumer of the API I can **create a sighting** of an animal with *date* (use the datetime datatype), a *latitude*, and a *longitude*.
     > Hint: An animal has_many sightings. (rails g resource Sighting animal_id:integer ...)
