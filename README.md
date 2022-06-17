@@ -1,6 +1,13 @@
 # README
-This application is a student challenge. The following is the prompt along with user and developer stories. The student will made edits to this README to keep track of edits and additions.
+This application is a student challenge. The following is the prompt along with user and developer stories. The student will make edits to this README to keep track of edits and additions.
 
+## Notes before implementation:
+
+File path: app/controllers/application_controller.rb
+ 
+ >`skip_before_action :verify_authenticity_token`
+ 
+ This code was added to assist with development. Allowing this code to ship could compromise app security.
 
 # The API Stories
 
@@ -11,11 +18,11 @@ The Forest Service is considering a proposal to place in conservancy a forest of
 - [x] Story: As the consumer of the API I can **see all the animals** in the database.
     > Hint: Make a few animals using Rails Console
 
-- [IN PROGRESS] Story: As the consumer of the API I can **update an animal** in the database.
+- [] Story: As the consumer of the API I can **update an animal** in the database.
 
 - [] Story: As the consumer of the API I can **destroy an animal** in the database.
 
-- [] Story: As the consumer of the API I can **create a new animal** in the database.
+- [x] Story: As the consumer of the API I can **create a new animal** in the database.
 
 - [] Story: As the consumer of the API I can **create a sighting** of an animal with *date* (use the datetime datatype), a *latitude*, and a *longitude*.
     > Hint: An animal has_many sightings. (rails g resource Sighting animal_id:integer ...)
