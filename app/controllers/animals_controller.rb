@@ -28,6 +28,13 @@ class AnimalsController < ApplicationController
         end
     end
 
+    def destroy
+        animal = Animal.find(params[:id])
+        animals = Animal.all
+        animal.destroy
+        render json: animals
+    end
+
     private
     def animal_params
         params.require(:animal).permit(:common_name, :latin_name, :kingdom)
