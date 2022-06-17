@@ -63,7 +63,7 @@ end
 - [ ] Story: As the consumer, I want to see a status code of 422 when a post request can not be completed because of validation errors.
 Check out Handling Errors in an API Application the Rails Way
 
-##Super Stretch Challenge
+## Super Stretch Challenge
 
 - [ ] Story: As the consumer of the API, I can submit sighting data along with a new animal in a single API call.
     > Hint: Look into `accepts_nested_attributes_for`
