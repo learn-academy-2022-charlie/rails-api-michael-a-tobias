@@ -20,6 +20,8 @@ I deleted views and helpers to prevent Ruby magic from looking for views.
 	deleted:    app/views/layouts/mailer.text.erb
 ```
 
+> Currently working on getting the animals_controller to display all the sightings associated with and individual animal. Might need to look at the user stories again.
+
 # The API Stories
 
 The Forest Service is considering a proposal to place in conservancy a forest of virgin Douglas fir just outside of Portland, Oregon. Before they give the go-ahead, they need to do an environmental impact study. They've asked you to build an API the rangers can use to report wildlife sightings.
