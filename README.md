@@ -18,7 +18,7 @@ The Forest Service is considering a proposal to place in conservancy a forest of
 - [x] Story: As the consumer of the API I can **see all the animals** in the database.
     > Hint: Make a few animals using Rails Console
 
-- [ ] Story: As the consumer of the API I can **update an animal** in the database.
+- [x] Story: As the consumer of the API I can **update an animal** in the database.
 
 - [ ] Story: As the consumer of the API I can **destroy an animal** in the database.
 

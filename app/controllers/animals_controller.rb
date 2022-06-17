@@ -13,7 +13,16 @@ class AnimalsController < ApplicationController
     def create
         animal = Animal.create(animal_params)
         if animal.valid? 
-        render json: animal
+            render json: animal
+        else
+            render json: animal.errors
+        end
+    end
+
+    def update
+        animal = Animal.find(params[:id])
+        if animal.update(params.require(:animal).permit(:common_name, :latin_name, :kingdom))
+            render json: animal
         else
             render json: animal.errors
         end
