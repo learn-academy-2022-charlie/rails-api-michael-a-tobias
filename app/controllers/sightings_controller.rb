@@ -1,17 +1,20 @@
 class SightingsController < ApplicationController
 
+    # GET
     def index
         sightings = Sighting.all
         render json: sightings
     end
 
+    # GET
     def show
         sighting = Sighting.find(params[:id])
         render json: sighting
     end
 
+    # POST
     def create
-        sighting = Sighting.create(animal_params)
+        sighting = Sighting.create(sighting_params)
         if sighting.valid? 
             render json: sighting
         else
@@ -19,15 +22,17 @@ class SightingsController < ApplicationController
         end
     end
 
+    # PUT
     def update
         sighting = Sighting.find(params[:id])
-        if sighting.update(params.require(:sighting).permit(:common_name, :latin_name, :kingdom))
+        if sighting.update(sighting_params)
             render json: sighting
         else
             render json: sighting.errors
         end
     end
-
+    
+    # DELETE
     def destroy
         sighting = Sighting.find(params[:id])
         sightings = Sighting.all
@@ -36,7 +41,7 @@ class SightingsController < ApplicationController
     end
 
     private
-    def animal_params
+    def sighting_params
         params.require(:sighting).permit(:animal_id, :date, :lat, :long)
     end
 

@@ -85,14 +85,38 @@ def create
 end
 ```
 
-- [ ] Story: As the consumer of the API I can **create a sighting** of an animal with *date* (use the datetime datatype), a *latitude*, and a *longitude*.
+- [x] Story: As the consumer of the API I can **create a sighting** of an animal with *date* (use the datetime datatype), a *latitude*, and a *longitude*.
     > Hint: An animal has_many sightings. (rails g resource Sighting animal_id:integer ...)
     
     > Hint: Datetime is written in Rails as “year-month-day hr:min:sec" (“2022-01-28 05:40:30") using 24-hr time
 
-- [ ] Story: As the consumer of the API I can update an **animal sighting** in the database.
+`$ rails g resource Sighting animal_id:integer date:datetime lat:decimal long:decimal`
 
-- [ ] Story: As the consumer of the API I can **destroy an animal sighting** in the database.
+- [x] Story: As the consumer of the API I can update an **animal sighting** in the database.
+
+> File path: app/controllers/sightings_controller.rb
+```
+    def update
+        sighting = Sighting.find(params[:id])
+        if sighting.update(sighting_params)
+            render json: sighting
+        else
+            render json: sighting.errors
+        end
+    end
+```
+
+- [x] Story: As the consumer of the API I can **destroy an animal sighting** in the database.
+
+> File path: app/controllers/sightings_controller.rb
+```
+def destroy
+        sighting = Sighting.find(params[:id])
+        sightings = Sighting.all
+        sighting.destroy
+        render json: sightings
+    end
+```
 
 - [ ] Story: As the consumer of the API, when I view a specific animal, I *can also see* a list sightings of that animal.
     > Hint: Checkout the Ruby on Rails API docs on how to include associations.
