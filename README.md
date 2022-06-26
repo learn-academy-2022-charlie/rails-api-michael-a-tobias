@@ -145,7 +145,7 @@ def show
 end
 ```
 
-- [ ] Story: As the consumer of the API, I can run a report to *list all sightings* during a given time period.
+- [x] Story: As the consumer of the API, I can run a report to *list all sightings* during a given time period.
     > Hint: Your controller can look like this:
 ```
 class SightingsController < ApplicationController
@@ -154,6 +154,29 @@ class SightingsController < ApplicationController
     render json: sightings
   end
 end
+```
+> File path: config/routes.rb
+```
+Rails.application.routes.draw do
+  resources :sightings
+  resources :animals
+  get 'sightings/:start_date/:end_date' => "sightings#index"
+end
+```
+
+> File path: app/controllers/sightings_controller.rb
+```
+    def index
+        sightings = Sighting.where(date: params[:start_date]..params[:end_date])
+        render json: sightings
+    end
+    
+    //----------//
+
+        private
+    def sighting_params
+        params.require(:sighting).permit(:animal_id, :date, :lat, :long, :start_date, :end_date)
+    end
 ```
 
 > Remember to add the start_date and end_date to what is permitted in your strong parameters method. In Postman, you will want to utilize the params section to get the correct data. Also see Routes with Params .
