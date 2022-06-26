@@ -9,7 +9,7 @@ class AnimalsController < ApplicationController
     # GET
     def show
         animal = Animal.find(params[:id])
-        render json: animal
+        render json: [animal, animal.sightings.all] # .sightings.all shows all sightings associated with the particular id
     end
 
     # POST
